@@ -23,6 +23,7 @@ public class ProductController {
     @PostMapping("/products")
     Product createProduct(@RequestBody Product toCreate){
         return repository.save(toCreate);
+
     }
 
 }
