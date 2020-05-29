@@ -4,6 +4,11 @@ import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.Set;
+
+/**
+ * Klasa reprezentuje typ produktu (a nie jego "fizyczny egzemplarz")
+ */
 
 @Entity
 @Table(name = "products")
@@ -20,6 +25,12 @@ public class Product {
     private float price;
 
     private String description;
+
+    @OneToMany(mappedBy = "product")
+    private Set<Item> items;
+
+    public Product() {
+    }
 
     public int getId() {
         return id;
