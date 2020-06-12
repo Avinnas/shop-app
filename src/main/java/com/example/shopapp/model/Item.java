@@ -23,14 +23,6 @@ public class Item {
 
     private LocalDateTime dateSold;
 
-    @NotBlank(message = "Name must be not blank")
-    private String name;
-
-    @NotNull
-    private float price;
-
-    private String description;
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User customer;
