@@ -8,6 +8,7 @@ import org.json.simple.parser.ParseException;
 import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ExternalShopHandler {
@@ -18,20 +19,39 @@ public class ExternalShopHandler {
         this.apiToken = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6WyJhbGxlZ3JvOmFwaTpvcmRlcnM6cmVhZCIsImFsbGVncm86YXBpOnByb2ZpbGU6d3JpdGUiLCJhbGxlZ3JvOmFwaTpzYWxlOm9mZmVyczp3cml0ZSIsImFsbGVncm86YXBpOmJpbGxpbmc6cmVhZCIsImFsbGVncm86YXBpOmNhbXBhaWducyIsImFsbGVncm86YXBpOmRpc3B1dGVzIiwiYWxsZWdybzphcGk6c2FsZTpvZmZlcnM6cmVhZCIsImFsbGVncm86YXBpOmJpZHMiLCJhbGxlZ3JvOmFwaTpvcmRlcnM6d3JpdGUiLCJhbGxlZ3JvOmFwaTphZHMiLCJhbGxlZ3JvOmFwaTpwYXltZW50czp3cml0ZSIsImFsbGVncm86YXBpOnNhbGU6c2V0dGluZ3M6d3JpdGUiLCJhbGxlZ3JvOmFwaTpwcm9maWxlOnJlYWQiLCJhbGxlZ3JvOmFwaTpyYXRpbmdzIiwiYWxsZWdybzphcGk6c2FsZTpzZXR0aW5nczpyZWFkIiwiYWxsZWdybzphcGk6cGF5bWVudHM6cmVhZCJdLCJhbGxlZ3JvX2FwaSI6dHJ1ZSwiZXhwIjoxNTkyMDg3MzYxLCJqdGkiOiI0YWViYjg3Yy1iYWExLTQ5ODQtOTZlZS1jNzdiYzM4NDIxMzUiLCJjbGllbnRfaWQiOiJmNjRmNWQyOTc0OTc0MjMyYmU3NzRmYWVlYWFhMGMwNSJ9.G6szjAVI51HPuSnBPGK-MJCpl-RwQdLUb-IXzay5R0uNqYEh6aBphvlVKIxNKAYVpaNAQq576pf952DOu0ejYJCGK0fyZ-heOU6Y5gepfg5pRFEdzjnHdMkoZI_JCIYqf7AqIXRYADbNdrW5lMTcy46fHm8f4N1BWIVUeTBwqbmOGHSnqIUtP40OGplsJHqc4BF0YCBVp-KJP2TI4VWq28BJHrkz6nBy3IqnX45jz-36wCX6nc297Bz-SL2StZrO8ozpY_WqftNrXNURhyyk1rFE8nFzgJqppP6FlB1UGLjJjVLATVWAMVtcpjvXTn7txax-tIHnl0PxFk8M2ghyKA";
     }
 
+    public ArrayList<Product> getItemsAsListFromExternalShop(String phrase, int number) {
+        phrase = phrase.replace(' ', '+');
+
+        ArrayList<Product> products = new ArrayList<>(); // We can return list of products
+
+        for (int i = 0; i < number; i++) {
+            String searchMode = "&searchMode=REGULAR";
+            String urlAsString = "https://api.allegro.pl/offers/listing?phrase=" + phrase + searchMode + "&offset=" + i + "&limit=1";
+            String json = getJsonFromSearch(urlAsString);
+//            System.out.println(json); // TMP
+//            System.out.println(); // TMP
+
+            Product product = extractProductFromJSON(json);
+            products.add(product);
+        }
+
+        return products;
+    }
+
     // productName nie moze miec polskich znakow
     public double getPriceOfProduct(String productName) {
-        String productAsJSON = findProduct(productName);
-        double productPrice = getPriceFromJSON(productAsJSON);
+
+        productName = productName.replace(' ', '+');
+        String urlAsString = "https://api.allegro.pl/offers/listing?phrase=" + productName + "&limit=1";
+
+        String productAsJSON = getJsonFromSearch(urlAsString);
+        double productPrice = extractProductFromJSON(productAsJSON).getPrice();
 
         return productPrice;
     }
 
-    // znajduje produkt w zewnetrznym sklepie i zwraca go w postaci JSONa
-    private String findProduct(String productName) {
-
+    private String getJsonFromSearch(String urlAsString) {
         try {
-            productName = productName.replace(' ', '+');
-            String urlAsString = "https://api.allegro.pl/offers/listing?phrase=" + productName + "&limit=1";
 
             URL url = new URL(urlAsString);
             HttpsURLConnection urlConnection = (HttpsURLConnection)url.openConnection();
@@ -52,11 +72,12 @@ public class ExternalShopHandler {
         return "Something went wrong";
     }
 
-    double getPriceFromJSON(String json) {
+    private Product extractProductFromJSON(String json) {
 
-        String priceAsString = "empty-price";
         JSONParser jsonParser = new JSONParser();
         Object object;
+
+        Product product = new Product();
 
         try {
             object = jsonParser.parse(json);
@@ -64,18 +85,32 @@ public class ExternalShopHandler {
 
             JSONObject items = (JSONObject) jsonObject.get("items");
             JSONArray promoted = (JSONArray) items.get("promoted");
+            JSONArray regular = (JSONArray) items.get("regular");
 
-            for (Object o : promoted) {
-                JSONObject o1 = (JSONObject) o;
-                JSONObject o2 = (JSONObject) o1.get("sellingMode");
-                JSONObject o3 = (JSONObject) o2.get("price");
-                priceAsString = (String) o3.get("amount");
+//            if (promoted.size() < 0 && regular.size() < 0) {
+//                // NO ITEM FOUND
+//                return product;
+//            }
+
+            assert (promoted.size() > 0);
+            for (Object promotedOne : promoted) {
+                JSONObject promotedOneJSONObject = (JSONObject) promotedOne;
+
+                String name = (String) promotedOneJSONObject.get("name");
+
+                JSONObject sellingModeJSONObject = (JSONObject) promotedOneJSONObject.get("sellingMode");
+                JSONObject priceJSONObject = (JSONObject) sellingModeJSONObject.get("price");
+                String priceAsString = (String) priceJSONObject.get("amount");
+
+                product.setName(name);
+                product.setPrice(Float.parseFloat(priceAsString));
+                product.setDescription("");
             }
         }
         catch (ParseException e) {
             e.printStackTrace();
         }
 
-        return Double.parseDouble(priceAsString);
+        return product;
     }
 }

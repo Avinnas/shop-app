@@ -12,6 +12,11 @@ public class ShopAppApplication {
 
 		// jedynie dla sprawdzenia czy działa
 		ExternalShopHandler externalShop = new ExternalShopHandler();
+		String phrase = "iphone X 64gb";
+		var products = externalShop.getItemsAsListFromExternalShop(phrase, 10);
+
+		System.out.println("---");
+		System.out.println(products.get(0).getPrice());
 		System.out.println(externalShop.getPriceOfProduct("iphone X 64gb"));
 		System.out.println(externalShop.getPriceOfProduct("Karta Podarunkowa prezent na slub - 100 zl"));
 	}
