@@ -4,3 +4,6 @@ spring:
       ddl-auto: update
   datasource:
     url: "jdbc:h2:file:./shop-app-db"
+  h2:
+    console:
+      enabled: true
