@@ -40,6 +40,13 @@ public class User {
     @JoinTable(name = "USER_ROLE", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
     private Set<Role> roles;
 
+    @OneToOne
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
+
+    @OneToMany(mappedBy = "customer")
+    private Set<Item> items;
+
     public String getEmail() {
         return email;
     }
@@ -71,4 +78,21 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
+    public Set<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(Set<Item> items) {
+        this.items = items;
+    }
+
 }

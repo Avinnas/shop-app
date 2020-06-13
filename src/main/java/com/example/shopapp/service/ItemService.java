@@ -24,5 +24,8 @@ public class ItemService {
         Item item = itemRepository.findById(id).orElseThrow();
         return new ProductItemDto(item.getProduct(), item);
     }
+    public void saveItem(Item toSave){
+        itemRepository.save(toSave);
+    }
 
 }

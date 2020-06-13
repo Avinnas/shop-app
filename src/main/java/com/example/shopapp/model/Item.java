@@ -27,6 +27,9 @@ public class Item {
     @JoinColumn(name = "user_id")
     private User customer;
 
+    @ManyToOne
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
 
     //Relacja do typu produktu
     @ManyToOne
@@ -62,5 +65,17 @@ public class Item {
 
     public Product getProduct() {
         return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public User getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(User customer) {
+        this.customer = customer;
     }
 }
