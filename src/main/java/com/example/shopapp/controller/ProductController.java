@@ -2,6 +2,7 @@ package com.example.shopapp.controller;
 
 import com.example.shopapp.model.Product;
 import com.example.shopapp.model.ProductRepository;
+import com.example.shopapp.service.ProductService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,14 +11,16 @@ import java.util.List;
 public class ProductController {
 
     private ProductRepository repository;
+    private ProductService productService;
 
-    public ProductController(ProductRepository repository) {
+    public ProductController(ProductRepository repository, ProductService productService) {
         this.repository = repository;
+        this.productService = productService;
     }
 
     @GetMapping("/products")
     List<Product> readAllProducts(){
-        return repository.findAll();
+        return productService.findAllProducts();
     }
 
     @PostMapping("/products")

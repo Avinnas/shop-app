@@ -25,4 +25,19 @@ public class ProductItemDto {
         this.dateSold = item.getDateSold();
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public LocalDateTime getDateSold() {
+        return dateSold;
+    }
 }
