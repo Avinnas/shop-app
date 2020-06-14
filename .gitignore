@@ -29,3 +29,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+shop-app-db.mv.db
+shop-app-db.trace.db
