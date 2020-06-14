@@ -47,6 +47,7 @@ public class User {
     @OneToMany(mappedBy = "customer")
     private Set<Item> items;
 
+
     public String getEmail() {
         return email;
     }

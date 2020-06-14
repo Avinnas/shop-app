@@ -21,9 +21,9 @@ public class Cart {
         return id;
     }
 
-    public User getCustomer() {
-        return customer;
-    }
+//    public User getCustomer() {
+//        return customer;
+//    }
 
     public void setId(int id) {
         this.id = id;

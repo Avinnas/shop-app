@@ -27,4 +27,10 @@ public class ItemController {
         return ResponseEntity.noContent().build();
     }
 
+    @PutMapping("/cart/{id}")
+    ResponseEntity<?> addToCart(@PathVariable int id){
+        itemService.addToCart(33, id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

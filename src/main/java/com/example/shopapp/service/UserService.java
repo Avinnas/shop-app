@@ -34,8 +34,6 @@ public class UserService {
         Role userRole = roleRepository.findByRole("ADMIN");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         return userRepository.save(user);
-
-
     }
 
     public List<ProductItemDto> readBoughtItems(User customer){
@@ -43,4 +41,6 @@ public class UserService {
                 .map(x -> itemService.readItemDetails(x))
                 .collect(Collectors.toList());
     }
+
+
 }
