@@ -33,6 +33,12 @@ public class ProductController {
         return modelAndView;
     }
 
+    @GetMapping("/products/{id}")
+    public ResponseEntity<?> readProductById(@PathVariable int id ){
+        return ResponseEntity.ok(repository.findById(id));
+    }
+
+
     @PostMapping("/products")
     Product createProduct(@RequestBody Product toCreate){
         return repository.save(toCreate);
