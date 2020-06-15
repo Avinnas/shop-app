@@ -63,7 +63,7 @@ public class CartService {
                 .collect(Collectors.toList());
     }
 
-    public void removeFromCart(int item_id){
-        itemRepository.findById(item_id).orElseThrow().setCart(null);
+    public void removeFromCart(int product_id){
+        itemRepository.findByProduct_IdAndCartIsNotNull(product_id).get(0).setCart(null);
     }
 }
