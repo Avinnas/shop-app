@@ -1,11 +1,9 @@
 package com.example.shopapp.service;
 
-import com.example.shopapp.model.Item;
-import com.example.shopapp.model.ItemRepository;
-import com.example.shopapp.model.Product;
-import com.example.shopapp.model.ProductRepository;
+import com.example.shopapp.model.*;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,5 +40,15 @@ public class ProductService {
             item.setProduct(product);
             itemRepository.save(item);
         }
+    }
+
+    public List<Product> getProductsFromShop(String phrase, int quantity){
+        ExternalShopHandler handler = new ExternalShopHandler();
+        ArrayList<Product> products = handler.getItemsAsListFromExternalShop(phrase, quantity);
+        productRepository.saveAll(products);
+        for (Product product : products){
+            addProductItems(product.getId(), 10);
+        }
+        return products;
     }
 }
