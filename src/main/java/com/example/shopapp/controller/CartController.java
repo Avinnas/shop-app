@@ -45,7 +45,7 @@ public class CartController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/buy")
+    @GetMapping("/buy")
     ResponseEntity<?> buyAllItems(){
         cartService.buyAllItemsInCart(userService.getCurrentUserId());
         return ResponseEntity.noContent().build();
