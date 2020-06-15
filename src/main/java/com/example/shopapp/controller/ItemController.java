@@ -2,7 +2,9 @@ package com.example.shopapp.controller;
 
 import com.example.shopapp.model.Item;
 import com.example.shopapp.model.ItemRepository;
+import com.example.shopapp.service.CartService;
 import com.example.shopapp.service.ItemService;
+import com.example.shopapp.service.UserService;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

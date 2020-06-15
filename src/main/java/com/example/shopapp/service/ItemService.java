@@ -1,19 +1,22 @@
 package com.example.shopapp.service;
 
 import com.example.shopapp.dto.ProductItemDto;
-import com.example.shopapp.model.Item;
-import com.example.shopapp.model.ItemRepository;
-import com.example.shopapp.model.Product;
-import com.example.shopapp.model.ProductRepository;
+import com.example.shopapp.model.*;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 
 @Service
 public class ItemService {
 
     ItemRepository itemRepository;
+    UserRepository userRepository;
 
-    public ItemService(ItemRepository itemRepository) {
+    public ItemService(ItemRepository itemRepository, UserRepository userRepository) {
         this.itemRepository = itemRepository;
+        this.userRepository = userRepository;
     }
 
     public ProductItemDto readItemDetails(Item item){
@@ -26,6 +29,16 @@ public class ItemService {
     }
     public void saveItem(Item toSave){
         itemRepository.save(toSave);
+    }
+
+    public void buyItem(int user_id, int item_id){
+        Item item = itemRepository.findById(item_id).orElseThrow();
+        item.setSold(true);
+        item.setCustomer(userRepository.findById(user_id).orElseThrow());
+        item.setCart(null);
+        Date in = new Date();
+        item.setDateSold(LocalDateTime.ofInstant(in.toInstant(), ZoneId.systemDefault()));
+        itemRepository.save(item);
     }
 
 }

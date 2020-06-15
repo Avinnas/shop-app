@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<<<<<<< HEAD
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+=======
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 <head>
     <meta charset="utf-8"/>
@@ -10,8 +19,12 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-    <title>Login</title>
+>>>>>>> 3f9cfcd42d0faf20b772b6479e50cb70ae2f410c
+    <title>Products</title>
 </head>
+
+
+<<<<<<< HEAD
 <!-navbar starts-->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">shop-app</a>
@@ -33,29 +46,17 @@
     </div>
 </nav>
 <!-navbar ends-->
-<body>
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-<div th:if="${param.error}">
-    <div class="alert alert-info">
-    Invalid username and password.
-    </div>
-</div>
-<div th:if="${param.logout}">
-    <div class="alert alert-info">
-    You have been logged out.
-    </div>
-</div>
-            <h1>Login</h1>
-<form th:action="@{/login}" method="post">
-    <div class="form-group"><label> E-mail : <input type="text" class="form-control" name="username"/> </label></div>
-    <div><label> Password: <input type="password" class="form-control" name="password"/> </label></div>
-    <button type="submit" class="btn btn-success">Sign In</button>
-    <span>Don't have an account yet? <a href="/" th:href="@{/registration}">Register</a></span>
-</form>
-        </div>
-    </div>
-</div>
-</body>
+
+
+=======
+>>>>>>> 3f9cfcd42d0faf20b772b6479e50cb70ae2f410c
+<h1>List of products</h1>
+<ul class="list-group">
+    <a  class="list-group-item list-group-item-action" th:each="product : ${products}" th:href="@{'/products/' + ${product.id}}">
+        <span> Produkt: </span>
+        <span th:text="${product.name}"> Title </span>
+        <span> Cena: </span>
+        <span th:text="${product.price}"> Author </span>
+    </a>
+</ul>
 </html>

@@ -78,4 +78,12 @@ public class Item {
     public void setCustomer(User customer) {
         this.customer = customer;
     }
+
+    Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
 }

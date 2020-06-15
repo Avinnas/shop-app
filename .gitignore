@@ -29,3 +29,13 @@ build/
 
 ### VS Code ###
 .vscode/
+<<<<<<< HEAD
+shop-app-db.mv.db
+*.db
+shop-app-db.mv.db
+=======
+
+shop-app-db.mv.db
+shop-app-db.trace.db
+>>>>>>> 3f9cfcd42d0faf20b772b6479e50cb70ae2f410c
+shop-app-db.trace.db
