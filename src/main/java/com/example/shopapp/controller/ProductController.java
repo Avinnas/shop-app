@@ -35,8 +35,8 @@ public class ProductController {
     public ModelAndView readProduct(@PathVariable int id){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("products");
-        Object list=readProductById(id).getBody();
-        modelAndView.addObject("product", list);
+        Object object=readProductById(id).getBody();
+        modelAndView.addObject("product", object);
         return modelAndView;
     }
     public ResponseEntity<Object> readProductById(@PathVariable int id ){

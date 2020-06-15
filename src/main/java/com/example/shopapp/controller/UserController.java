@@ -8,11 +8,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
+import java.util.List;
+
 @Controller
 public class UserController {
 @Autowired
@@ -72,7 +72,15 @@ public class UserController {
     }
 
     @GetMapping("/bought")
-    public ResponseEntity<?> readBoughtItems(){
+    @ResponseBody
+    public ModelAndView viewBought(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("bought");
+        List list=readBoughtItems().getBody();
+        modelAndView.addObject("bought", list);
+        return modelAndView;
+    }
+    public ResponseEntity<List> readBoughtItems(){
         return ResponseEntity
                 .ok(userService.readBoughtItems
                         (userService.getCurrentUserId()));
