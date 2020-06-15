@@ -52,4 +52,8 @@ public class ProductService {
         }
         return products;
     }
+    public List<Product> getProductsFromShop(String phrase){
+        return this.getProductsFromShop(phrase, 10);
+    }
+
 }

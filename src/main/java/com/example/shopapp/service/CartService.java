@@ -62,4 +62,8 @@ public class CartService {
                 .map(Item::getProduct)
                 .collect(Collectors.toList());
     }
+
+    public void removeFromCart(int item_id){
+        itemRepository.findById(item_id).orElseThrow().setCart(null);
+    }
 }

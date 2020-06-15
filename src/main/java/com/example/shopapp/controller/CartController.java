@@ -5,10 +5,7 @@ import com.example.shopapp.service.ProductService;
 import com.example.shopapp.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -49,5 +46,12 @@ public class CartController {
     ResponseEntity<?> buyAllItems(){
         cartService.buyAllItemsInCart(userService.getCurrentUserId());
         return ResponseEntity.noContent().build();
+    }
+
+    // PODAJEMY ID ITEMU     
+    @DeleteMapping("/cart/{id}")
+    ResponseEntity<?> deleteItemFromCart(@PathVariable int id){
+        cartService.removeFromCart(id);
+        return ResponseEntity.ok().build();
     }
 }
