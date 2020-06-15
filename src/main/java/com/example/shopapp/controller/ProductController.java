@@ -31,7 +31,15 @@ public class ProductController {
     }
 
     @GetMapping("/products/{id}")
-    public ResponseEntity<?> readProductById(@PathVariable int id ){
+    @ResponseBody
+    public ModelAndView readProduct(@PathVariable int id){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("products");
+        Object list=readProductById(id).getBody();
+        modelAndView.addObject("product", list);
+        return modelAndView;
+    }
+    public ResponseEntity<Object> readProductById(@PathVariable int id ){
         return ResponseEntity.ok(repository.findById(id));
     }
 

@@ -55,6 +55,11 @@
         <span th:text="${product.name}"> Product </span>
         <span> Cena: </span>
         <span th:text="${product.price}"> Price</span>
+        <span>
+        <form th:action="@{'/cart/' + ${product.id}}" method="get">
+            <input class="btn btn-primary" type="submit" value="buy">
+        </form></span>
     </a>
 </ul>
+
 </html>

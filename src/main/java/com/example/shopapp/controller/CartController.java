@@ -39,7 +39,7 @@ public class CartController {
     }
 
 
-    @PutMapping("/cart/{id}")
+    @GetMapping("/cart/{id}")
     ResponseEntity<?> addToCart(@PathVariable int id){
         productService.addProductToCart(userService.getCurrentUserId(), id);
         return ResponseEntity.noContent().build();
