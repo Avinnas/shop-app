@@ -47,14 +47,14 @@
 </nav>
 <!-navbar ends-->
 
-    
+
 <h1>List of products</h1>
 <ul class="list-group">
     <a  class="list-group-item list-group-item-action" th:each="product : ${products}" th:href="@{'/products/' + ${product.id}}">
         <span> Produkt: </span>
-        <span th:text="${product.name}"> Title </span>
+        <span th:text="${product.name}"> Product </span>
         <span> Cena: </span>
-        <span th:text="${product.price}"> Author </span>
+        <span th:text="${product.price}"> Price</span>
     </a>
 </ul>
 </html>

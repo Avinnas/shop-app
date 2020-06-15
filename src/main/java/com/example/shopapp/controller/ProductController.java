@@ -22,9 +22,6 @@ public class ProductController {
     }
 
     @GetMapping("/products")
-//    List<Product> readAllProducts() {
-//        return productService.findAllProducts();
-//    }
     public ModelAndView readAllProducts(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("products");
