@@ -32,9 +32,10 @@ public class ItemController {
         itemService.saveItem(toCreate);
         return ResponseEntity.noContent().build();
     }
-
-
-
-
+    @PutMapping("/cart/{id}")
+    ResponseEntity<?> addToCart(@PathVariable int id){
+        cartService.addToCart(userService.getCurrentUserId(), id);
+        return ResponseEntity.noContent().build();
+    }
 
 }
