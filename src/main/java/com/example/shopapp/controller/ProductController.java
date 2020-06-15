@@ -1,8 +1,10 @@
 package com.example.shopapp.controller;
 
+import com.example.shopapp.model.ItemRepository;
 import com.example.shopapp.model.Product;
 import com.example.shopapp.model.ProductRepository;
 import com.example.shopapp.service.ProductService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -35,6 +37,11 @@ public class ProductController {
     Product createProduct(@RequestBody Product toCreate){
         return repository.save(toCreate);
 
+    }
+    @PostMapping("/products/{id}/{quantity}")
+    ResponseEntity<?> addItems(@PathVariable int id, @PathVariable int quantity){
+        productService.addProductItems(id, quantity);
+        return ResponseEntity.noContent().build();
     }
 
 }

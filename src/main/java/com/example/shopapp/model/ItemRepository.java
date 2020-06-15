@@ -9,5 +9,6 @@ import java.util.List;
 
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Integer> {
-    List<Item> findAllByCustomer_Id(Integer id);
+    List<Item> findAllByCustomer_IdOrderByDateSold(Integer id);
+    List<Item> findByProduct_IdAndSoldIsFalseAndCartIsNull(Integer id);
 }

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class CartService {
@@ -49,7 +50,16 @@ public class CartService {
             itemService.buyItem(user_id, item.getId());
             itemRepository.save(item);
         }
-
-
+    }
+    public List<Product> readProductsInCart(int user_id){
+        User user = userRepository.findById(user_id).orElseThrow();
+        if (user.getCart() == null) {
+            createCart(user_id);
+        }
+        userRepository.save(user);
+        Cart cart = user.getCart();
+        return cart.getItems().stream()
+                .map(Item::getProduct)
+                .collect(Collectors.toList());
     }
 }

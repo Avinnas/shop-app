@@ -3,10 +3,12 @@ package com.example.shopapp.controller;
 import com.example.shopapp.model.User;
 import com.example.shopapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -67,5 +69,12 @@ public class UserController {
         modelAndView.addObject("userMessage","This Page is available to Users with User Role");
         modelAndView.setViewName("user/userHome");
         return modelAndView;
+    }
+
+    @GetMapping("/bought")
+    public ResponseEntity<?> readBoughtItems(){
+        return ResponseEntity
+                .ok(userService.readBoughtItems
+                        (userService.getCurrentUserId()));
     }
 }

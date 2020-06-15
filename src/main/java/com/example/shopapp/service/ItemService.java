@@ -35,6 +35,7 @@ public class ItemService {
         Item item = itemRepository.findById(item_id).orElseThrow();
         item.setSold(true);
         item.setCustomer(userRepository.findById(user_id).orElseThrow());
+        item.setCart(null);
         Date in = new Date();
         item.setDateSold(LocalDateTime.ofInstant(in.toInstant(), ZoneId.systemDefault()));
         itemRepository.save(item);

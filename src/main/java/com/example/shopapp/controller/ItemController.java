@@ -2,7 +2,9 @@ package com.example.shopapp.controller;
 
 import com.example.shopapp.model.Item;
 import com.example.shopapp.model.ItemRepository;
+import com.example.shopapp.service.CartService;
 import com.example.shopapp.service.ItemService;
+import com.example.shopapp.service.UserService;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -11,9 +13,13 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class ItemController {
     ItemService itemService;
+    UserService userService;
+    CartService cartService;
 
-    public ItemController(ItemService itemService) {
+    public ItemController(ItemService itemService, UserService userService, CartService cartService) {
         this.itemService = itemService;
+        this.userService = userService;
+        this.cartService = cartService;
     }
 
     @GetMapping("/items/{id}")
@@ -27,10 +33,8 @@ public class ItemController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/cart/{id}")
-    ResponseEntity<?> addToCart(@PathVariable int id){
-        itemService.addToCart(33, id);
-        return ResponseEntity.noContent().build();
-    }
+
+
+
 
 }
