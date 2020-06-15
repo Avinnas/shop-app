@@ -48,6 +48,7 @@ public class ProductService {
         productRepository.saveAll(products);
         for (Product product : products){
             addProductItems(product.getId(), 10);
+            product.setPrice(product.getPrice() * 1.2f);
         }
         return products;
     }
