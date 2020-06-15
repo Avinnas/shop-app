@@ -46,6 +46,9 @@ public class ProductService {
         ExternalShopHandler handler = new ExternalShopHandler();
         ArrayList<Product> products = handler.getItemsAsListFromExternalShop(phrase, quantity);
         productRepository.saveAll(products);
+        for (Product product : products){
+            addProductItems(product.getId(), 10);
+        }
         return products;
     }
 }
