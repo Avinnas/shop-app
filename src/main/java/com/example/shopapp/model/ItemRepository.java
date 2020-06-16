@@ -12,5 +12,5 @@ import java.util.Set;
 public interface ItemRepository extends JpaRepository<Item, Integer> {
     List<Item> findAllByCustomer_IdOrderByDateSold(Integer id);
     List<Item> findByProduct_IdAndSoldIsFalseAndCartIsNull(Integer id);
-    List<Item> findByProduct_IdAndCartIsNotNull(Integer id);
+    List<Item> findByProduct_IdAndCart_Id(Integer id, Integer cart_id);
 }

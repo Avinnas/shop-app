@@ -50,7 +50,7 @@ public class CartController {
 
     @DeleteMapping("/cart/{id}")
     ResponseEntity<?> deleteItemFromCart(@PathVariable int id){
-        cartService.removeFromCart(id);
+        cartService.removeFromCart(id, userService.getCurrentUserId());
         return ResponseEntity.ok().build();
     }
 }
