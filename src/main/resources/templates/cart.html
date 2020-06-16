@@ -51,7 +51,7 @@
             <span> Cena: </span>
             <span th:text="${product.price}"> Price </span>
             <span>
-                <form th:action="@{'/cart/' + ${product.id}}" th:method="delete">
+                <form th:action="@{'/cart/delete/' + ${product.id}}" method="get">
                 <input class="btn btn-danger" type="submit"   value="Delete" >
                 </form>
             </span>

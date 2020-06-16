@@ -64,6 +64,8 @@ public class CartService {
     }
 
     public void removeFromCart(int product_id){
-        itemRepository.findByProduct_IdAndCartIsNotNull(product_id).get(0).setCart(null);
+        Item item = itemRepository.findByProduct_IdAndCartIsNotNull(product_id).get(0);
+        item.setCart(null);
+        itemRepository.save(item);
     }
 }
