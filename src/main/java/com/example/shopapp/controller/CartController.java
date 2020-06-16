@@ -51,6 +51,6 @@ public class CartController {
     @GetMapping("/cart/delete/{id}")
     ResponseEntity<?> deleteItemFromCart(@PathVariable int id){
         cartService.removeFromCart(id, userService.getCurrentUserId());
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 }
