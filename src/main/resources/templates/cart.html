@@ -45,16 +45,21 @@
 
     <h1>In cart:</h1>
     <ul class="list-group">
-        <a  class="list-group-item list-group-item-action" th:each="product : ${incartprod}" th:href="@{'/products/' + ${product.id}}">
+        <a  class="list-group-item list-group-item-action" th:each="product : ${incartprod}" >
             <span> Produkt: </span>
             <span th:text="${product.name}"> Product </span>
             <span> Cena: </span>
             <span th:text="${product.price}"> Price </span>
+            <span>
+                <form th:action="@{'/cart/' + ${product.id}}" th:method="delete">
+                <input class="btn btn-danger" type="submit"   value="Delete" >
+                </form>
+            </span>
         </a>
     </ul>
 
     <form th:action="@{/buy}" method="get">
-        <input class="btn btn-primary" type="submit" onclick="window.location.reload();"  value="Buy items from cart" >
+        <input class="btn btn-primary" type="submit"   value="Buy items from cart" >
     </form>
 
 
