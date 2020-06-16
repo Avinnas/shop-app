@@ -51,7 +51,6 @@ public class UserService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String name = authentication.getName();
         return findUserByEmail(name).getId();
-       //return 323;
     }
 
 

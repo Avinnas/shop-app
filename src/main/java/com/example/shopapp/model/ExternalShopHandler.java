@@ -28,8 +28,6 @@ public class ExternalShopHandler {
             String searchMode = "&searchMode=REGULAR";
             String urlAsString = "https://api.allegro.pl/offers/listing?phrase=" + phrase + searchMode + "&offset=" + i + "&limit=1";
             String json = getJsonFromSearch(urlAsString);
-//            System.out.println(json); // TMP
-//            System.out.println(); // TMP
 
             Product product = extractProductFromJSON(json);
             products.add(product);
@@ -86,11 +84,6 @@ public class ExternalShopHandler {
             JSONObject items = (JSONObject) jsonObject.get("items");
             JSONArray promoted = (JSONArray) items.get("promoted");
             JSONArray regular = (JSONArray) items.get("regular");
-
-//            if (promoted.size() < 0 && regular.size() < 0) {
-//                // NO ITEM FOUND
-//                return product;
-//            }
 
             assert (promoted.size() > 0);
             for (Object promotedOne : promoted) {

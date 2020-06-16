@@ -55,11 +55,6 @@ public class ProductController {
         return ResponseEntity.noContent().build();
     }
 
-//    @GetMapping("/products/{name}/{quantity}")
-//    ResponseEntity<?> addProductsFromExternalShop(@PathVariable String name, @PathVariable int quantity){
-//        return ResponseEntity.ok(productService.getProductsFromShop(name, quantity));
-//    }
-
     @GetMapping("/products/{name}/{quantity}")
     String addProductsFromExternalShop(@PathVariable String name, @PathVariable int quantity){
         productService.getProductsFromShop(name, quantity);
