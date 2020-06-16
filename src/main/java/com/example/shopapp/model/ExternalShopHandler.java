@@ -22,7 +22,7 @@ public class ExternalShopHandler {
     public ArrayList<Product> getItemsAsListFromExternalShop(String phrase, int number) {
         phrase = phrase.replace(' ', '+');
 
-        ArrayList<Product> products = new ArrayList<>(); // We can return list of products
+        ArrayList<Product> products = new ArrayList<>();
 
         for (int i = 0; i < number; i++) {
             String searchMode = "&searchMode=REGULAR";
@@ -36,7 +36,6 @@ public class ExternalShopHandler {
         return products;
     }
 
-    // productName nie moze miec polskich znakow
     public double getPriceOfProduct(String productName) {
 
         productName = productName.replace(' ', '+');
