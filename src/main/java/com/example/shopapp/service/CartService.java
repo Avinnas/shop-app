@@ -63,11 +63,11 @@ public class CartService {
                 .collect(Collectors.toList());
     }
 
-    public void removeFromCart(int product_id, int user_id){
+    public void removeFromCart(int product_id, int user_id) {
         int cart_id = userRepository.findById(user_id).orElseThrow().getCart().getId();
-        Item item =itemRepository.findByProduct_IdAndCart_Id(product_id, cart_id).get(0);
+        Item item = itemRepository.findByProduct_IdAndCart_Id(product_id, cart_id).get(0);
         item.setCart(null);
         itemRepository.save(item);
-
     }
+
 }

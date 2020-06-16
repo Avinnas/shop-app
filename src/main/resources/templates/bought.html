@@ -9,11 +9,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <head>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <title>Products</title>
+
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+
+        <title>Bought by user</title>
     </head>
 
 
@@ -43,26 +50,17 @@
     </nav>
     <!-navbar ends-->
 
-    <h1>In cart:</h1>
+
+    <h1>Products bought by user</h1>
     <ul class="list-group">
-        <a  class="list-group-item list-group-item-action" th:each="product : ${incartprod}" >
+        <a  class="list-group-item list-group-item-action" th:each="product : ${bought}" >
             <span> Produkt: </span>
             <span th:text="${product.name}"> Product </span>
             <span> Cena: </span>
-            <span th:text="${product.price}"> Price </span>
-            <span>
-                <form th:action="@{'/cart/delete/' + ${product.id}}" method="get">
-                <input class="btn btn-danger" type="submit"   value="Delete" >
-                </form>
-            </span>
+            <span th:text="${product.price}"> Price</span>
+            <span> Data: </span>
+            <span th:text="${product.dateSold}"> Price</span>
         </a>
     </ul>
-
-    <form th:action="@{/buy}" method="get">
-        <input class="btn btn-primary" type="submit"   value="Buy items from cart" >
-    </form>
-
-
-
 
 </html>

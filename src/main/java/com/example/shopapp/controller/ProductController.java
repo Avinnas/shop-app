@@ -35,8 +35,8 @@ public class ProductController {
     public ModelAndView readProduct(@PathVariable int id){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("products");
-        Object list=readProductById(id).getBody();
-        modelAndView.addObject("product", list);
+        Object object=readProductById(id).getBody();
+        modelAndView.addObject("product", object);
         return modelAndView;
     }
     public ResponseEntity<Object> readProductById(@PathVariable int id ){
@@ -55,9 +55,16 @@ public class ProductController {
         return ResponseEntity.noContent().build();
     }
 
+//    @GetMapping("/products/{name}/{quantity}")
+//    ResponseEntity<?> addProductsFromExternalShop(@PathVariable String name, @PathVariable int quantity){
+//        return ResponseEntity.ok(productService.getProductsFromShop(name, quantity));
+//    }
+
     @GetMapping("/products/{name}/{quantity}")
-    ResponseEntity<?> addProductsFromExternalShop(@PathVariable String name, @PathVariable int quantity){
-        return ResponseEntity.ok(productService.getProductsFromShop(name, quantity));
+    String addProductsFromExternalShop(@PathVariable String name, @PathVariable int quantity){
+        productService.getProductsFromShop(name, quantity);
+
+        return "Pomyslnie dodano produkty";
     }
 
 }
