@@ -14,8 +14,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <title>Products</title>
-    </head>
 
+        <link rel="stylesheet" th:href="@{/css/styles.css}">
+    </head>
+<body style="padding: 40px">
 
 
     <!-navbar starts-->
@@ -48,8 +50,10 @@
         <a  class="list-group-item list-group-item-action" th:each="product : ${incartprod}" >
             <span> Produkt: </span>
             <span th:text="${product.name}"> Product </span>
+            <br>
             <span> Cena: </span>
             <span th:text="${product.price}"> Price </span>
+            <br>
             <span>
                 <form th:action="@{'/cart/delete/' + ${product.id}}" method="get">
                 <input class="btn btn-danger" type="submit"   value="Delete" >
@@ -61,7 +65,7 @@
     <form th:action="@{/buy}" method="get">
         <input class="btn btn-primary" type="submit"   value="Buy items from cart" >
     </form>
-
+</body>
 
 
 
